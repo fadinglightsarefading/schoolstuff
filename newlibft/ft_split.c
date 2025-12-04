@@ -19,11 +19,14 @@ static char	*ft_replace_delimiter(char *str, char ch, int *cnt)
 	*cnt = 0;
 	while (str[i])
 	{
-		if (str[i++] == ch)
-		{
-			(*cnt)++;
-			str[i - 1] = '\0';
-		}
+		while (str[i] == ch)
+				i++;
+		if (str[i] != ch && str[i] != '\0')
+				(*cnt)++;
+		while (str[i] != ch && str[i] != '\0')
+				i++;
+		if (str[i] == ch)
+			str[i++] = '\0';
 	}
 	return (str);
 }
@@ -36,13 +39,20 @@ char	**ft_split(const char *s, char c)
 	char	**final;
 
 	string = ft_strdup(s);
+	if (!string)
+			return (NULL);
 	string = ft_replace_delimiter(string, c, &count);
-	final = malloc((count + 2) * sizeof(char *));
+	final = malloc((count + 1) * sizeof(char *));
+	if (!final)
+			return (NULL);
 	i = 0;
-	count += 1;
 	while (count--)
 	{
+		while (*string == c)
+				string++;
 		final[i++] = ft_strdup(string);
+		if (!(final[i - 1]))
+				return (NULL);
 		while (*string)
 			string++;
 		string++;

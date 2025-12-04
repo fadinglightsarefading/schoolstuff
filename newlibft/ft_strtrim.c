@@ -16,9 +16,22 @@ char	*ft_strtrim(const char *s1, const char *set)
 	int		i;
 	int		j;
 	int		flag;
-	char	*retstr;
+	char	*s2;
+	const char	*s1_cpy;
 
-	retstr = malloc(ft_strlen(s1) * sizeof(char));
+	flag = 0;
+	s1_cpy = s1;
+	while (*s1_cpy)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(set))
+			if (set[j++] == *s1_cpy)
+				flag++;
+		s1_cpy++;
+	}
+	s2 = malloc((ft_strlen(s1) - flag + 1) * sizeof(char));
+	if (!s2)
+			return (NULL);
 	i = 0;
 	while (*s1)
 	{
@@ -28,10 +41,10 @@ char	*ft_strtrim(const char *s1, const char *set)
 			if (set[j++] == *s1)
 				flag++;
 		if (!flag)
-			retstr[i++] = *s1++;
+			s2[i++] = *s1++;
 		else
 			s1++;
 	}
-	retstr[i] = '\0';
-	return (retstr);
+	s2[i] = '\0';
+	return (s2);
 }
