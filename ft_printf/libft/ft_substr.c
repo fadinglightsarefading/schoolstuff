@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/19 15:51:33 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/02 18:50:11 by cclarke          ###   ########.fr       */
+/*   Created: 2025/11/22 18:23:33 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/04 17:26:11 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
-	void			*a;
+	int				allocamt;
+	char			*sub;
 
-	a = malloc(nmemb * size);
-	if (a == NULL || (nmemb >= (SIZE_MAX - 5) && nmemb <= SIZE_MAX
-		&& size >= (SIZE_MAX - 5) && size <= SIZE_MAX))
+	if (start > (ft_strlen(s) + 1))
+	{
+		allocamt = 1;
+		start = ft_strlen(s);
+	}
+	else if (len > ft_strlen(s) - start)
+		allocamt = ft_strlen(s) - start + 1;
+	else
+		allocamt = ft_strlen(s) - (ft_strlen(s) - len) + 1;
+	sub = malloc(allocamt * sizeof(char));
+	if (sub == NULL)
 		return (NULL);
 	i = 0;
-	while (i < nmemb * size)
-		((unsigned char *)a)[i++] = 0;
-	return (a);
+	while (i < (unsigned int)allocamt && i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	return (sub);
 }

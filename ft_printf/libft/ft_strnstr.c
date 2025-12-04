@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:52:18 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/02 18:18:24 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:09:33 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -21,6 +21,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (len == 1 && ft_strlen(little) == 1)
 		len++;
 	if (len)
+	{
 		while (*big && --len)
 		{
 			cbig = (char *)big;
@@ -34,5 +35,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 				return ((char *)big);
 			big++;
 		}
+	}
 	return (NULL);
 }

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 17:56:04 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 19:36:41 by cclarke          ###   ########.fr       */
+/*   Created: 2025/11/19 15:51:33 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/04 16:50:26 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *s, ...)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	va_list	ap;
-	int	i;
+	unsigned int	i;
+	void			*a;
 
-	va_start(ap, s);
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\\')
-			ft_backslash(s[++i]);
-		else if (s[i] == '%' && s[i + 1] == '%')
-		{
-				write(1, "%", 1);
-				i++;
-		}
-		else
-			ft_putchar(s[i]);
-	}
-	va_end(ap);
-	return (0);
+	a = malloc(nmemb * size);
+	if (a == NULL || (nmemb >= (SIZE_MAX - 5) && nmemb <= SIZE_MAX
+			&& size >= (SIZE_MAX - 5) && size <= SIZE_MAX))
+		return (NULL);
+	i = 0;
+	while (i < nmemb * size)
+		((unsigned char *)a)[i++] = 0;
+	return (a);
 }

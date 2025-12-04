@@ -1,35 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_percent.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 17:56:04 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 19:36:41 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/04 19:27:08 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/04 19:29:17 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-int	ft_printf(const char *s, ...)
+void	ft_putchar(char ch)
 {
-	va_list	ap;
-	int	i;
-
-	va_start(ap, s);
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\\')
-			ft_backslash(s[++i]);
-		else if (s[i] == '%' && s[i + 1] == '%')
-		{
-				write(1, "%", 1);
-				i++;
-		}
-		else
-			ft_putchar(s[i]);
-	}
-	va_end(ap);
-	return (0);
+	write(1, &ch, 1);
 }
