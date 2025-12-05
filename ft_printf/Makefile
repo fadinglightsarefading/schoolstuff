@@ -6,7 +6,7 @@
 #    By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/04 17:58:34 by cclarke           #+#    #+#              #
-#    Updated: 2025/12/04 19:28:04 by cclarke          ###   ########.fr        #
+#    Updated: 2025/12/05 17:24:19 by cclarke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC	=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 INCLUDE	=	libftprintf.h libft/libft.h
 
-SRC	=	ft_printf.c ft_backslash.c ft_percent.c
+SRC	=	ft_printf.c ft_printalnum.c ft_printstr.c
 
 OBJ	=	$(SRC:.c=.o)
 

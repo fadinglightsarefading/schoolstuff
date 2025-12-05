@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_backslash.c                                     :+:      :+:    :+:   */
+/*   ft_printchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 17:39:48 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 19:35:20 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/04 19:27:08 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/05 16:53:22 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-void	ft_backslash(const char s)
+void	ft_printchar(char ch, int *i)
 {
-	if (s == 'n')
-		write(1, "\n", 1);
+	write(1, &ch, 1);
+	(*i)++;
 }

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_printalnum.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 11:01:01 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/05 18:52:11 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/05 17:09:54 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/05 18:57:38 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libftprintf.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_printalnum(char ch, int c, int *i)
 {
-	char	*cdest;
+	char	printch;
+	char	*printstr;
 
-	cdest = (char *)dest;
-	while (n--)
-		*cdest++ = *(char *)src++;
-	return (dest);
+	printch = (char)c;
+	if (ch == 'd')
+	{
+		printstr = ft_strdup(ft_itoa(c));
+		write(1, printstr, ft_strlen(printstr));
+	}
+	else
+		write(1, &printch, 1);
+	(*i)++;
 }

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_percent.c                                       :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 19:27:08 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 19:29:17 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/05 16:52:08 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/05 16:54:51 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-void	ft_putchar(char ch)
+void	ft_printstr(char *s, int *i)
 {
-	write(1, &ch, 1);
+	write(1, s, ft_strlen(s));
+	(*i)++;
 }

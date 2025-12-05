@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:51:26 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 19:28:26 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/05 17:25:26 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "libft/libft.h"
 
 int	ft_printf(const char *s, ...);
-void	ft_backslash(char c);
-void	ft_putchar(char ch);
+void	ft_printalnum(char ch, int c, int *i);
+void	ft_printstr(char *s, int *i);
 
 #endif

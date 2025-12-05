@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 11:01:01 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/05 18:52:11 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/05 17:00:28 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/05 17:10:01 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libftprintf.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_printhex(void *vptr, int *i)
 {
-	char	*cdest;
+	char	*hex;
+	uintptr_t	addr;
 
-	cdest = (char *)dest;
-	while (n--)
-		*cdest++ = *(char *)src++;
-	return (dest);
+	hex = "0123456789abcdef";
+	addr = (uintptr_t)vptr;
+	
+
+	(*i)++;
 }
