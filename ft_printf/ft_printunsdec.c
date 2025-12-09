@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printalnum.c                                    :+:      :+:    :+:   */
+/*   ft_printunsdec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:09:54 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/09 16:27:30 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/09 16:29:30 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/09 16:30:14 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-void	ft_printalnum(char ch, int c, int *i)
-{
-	char	printch;
-	char	*printstr;
-
-	printch = (char)c;
-	if (ch == 'd' || ch == 'i')
-	{
-		printstr = ft_strdup(ft_itoa(c));
-		write(1, printstr, ft_strlen(printstr));
-	}
-	else
-		write(1, &printch, 1);
-	(*i)++;
-}
+void	ft_printunsdec(unsigned int :

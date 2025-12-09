@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:51:26 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/05 17:25:26 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/09 16:24:41 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@
 int	ft_printf(const char *s, ...);
 void	ft_printalnum(char ch, int c, int *i);
 void	ft_printstr(char *s, int *i);
+void	ft_printhexaddr(void *vptr, int *i);
 
 #endif

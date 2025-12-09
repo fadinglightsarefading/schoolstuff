@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printalnum.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:09:54 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/09 16:27:30 by cclarke          ###   ########.fr       */
+/*   Created: 2025/12/09 15:14:29 by cclarke           #+#    #+#             */
+/*   Updated: 2025/12/09 15:14:30 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
 
-void	ft_printalnum(char ch, int c, int *i)
+#include "libft.h"
+
+t_list	*ft_lstnew(void *content)
 {
-	char	printch;
-	char	*printstr;
+	t_list	*new;
 
-	printch = (char)c;
-	if (ch == 'd' || ch == 'i')
-	{
-		printstr = ft_strdup(ft_itoa(c));
-		write(1, printstr, ft_strlen(printstr));
-	}
-	else
-		write(1, &printch, 1);
-	(*i)++;
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
