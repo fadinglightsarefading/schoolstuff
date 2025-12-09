@@ -24,7 +24,7 @@ I can't provide these, since the README wasn't mandatory when I finished the Lib
 I didn't make a record of it. -- I had a look at a few GitHub pages, and AI wasn't really used for
 anything else than debugging.
 
-**Detailed Description of the Library**\
+**Detailed Description of the Library**
 - `ft_isalpha() ft_isdigit() ft_isalnum() ft_isascii() ft_isprint() ft_strlen() ft_memset()
 ft_bzero() ft_memcpy() ft_memmove() ft_strlcpy() ft_strlcat() ft_toupper() ft_tolower()
 ft_strchr() ft_strrchr() ft_strncmp() ft_memchr() ft_memcmp() ft_strnstr() ft_atoi() ft_calloc()
