@@ -20,9 +20,11 @@ Once the static library has been compiled, all that's left to be done in order t
 compiling it. That's how I do it, anyway.
 
 **Resources**\
-I can't provide these, since the README wasn't mandatory when I finished the Libft project, so
-I didn't make a record of it. -- I had a look at a few GitHub pages, and AI wasn't really used for
-anything else than debugging.
+I can't provide very many of these, since the README wasn't mandatory when I finished the Libft
+project, so I didn't make a record of it. For the linked lists, I used a document called 'Linked
+Lists Basics'. Besides that, I had a look at a few GitHub pages for others' Libft projects and
+StackOverflow questions that were asked by people in the past; and AI wasn't really used for
+anything else than debugging. 
 
 **Detailed Description of the Library**
 - `ft_isalpha() ft_isdigit() ft_isalnum() ft_isascii() ft_isprint() ft_strlen() ft_memset()
