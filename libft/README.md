@@ -13,7 +13,7 @@ Courtesy of the Makefile, we have four possible options:
 object (`.o`) files;
 - `make clean` gets rid of the `.o` files, but not the `.a` file;
 - `make fclean` gets rid of the `.o` files *and* the `.a` file;
-- and `make re` is essentially the same as employing `make fclean` and then `make`. \
+- and `make re` is essentially the same as employing `make fclean` and then `make`.
 Once the static library has been compiled, all that's left to be done in order to use it is to
 `#include "libft.h"` in any given C programme and using the flags `-Llibft -lft`[^1] when
 compiling it. That's how I do it, anyway.
@@ -27,7 +27,7 @@ anything else than debugging.
 - `ft_isalpha() ft_isdigit() ft_isalnum() ft_isascii() ft_isprint() ft_strlen() ft_memset()
 ft_bzero() ft_memcpy() ft_memmove() ft_strlcpy() ft_strlcat() ft_toupper() ft_tolower()
 ft_strchr() ft_strrchr() ft_strncmp() ft_memchr() ft_memcmp() ft_strnstr() ft_atoi() ft_calloc()
-ft_strdup()`\
+ft_strdup()`
 The man pages for the near-homonyms of these provide enough by way of perfectly legible,
 plain-English descriptions. I'm sure I don't need to bother with these ones.
 - `ft_substr()` finds a term in a string, makes it into its own string, spits it out.
