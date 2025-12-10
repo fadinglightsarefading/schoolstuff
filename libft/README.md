@@ -24,7 +24,7 @@ I can't provide very many of these, since the README wasn't mandatory when I fin
 project, so I didn't make a record of it. For the linked lists, I used a document called 'Linked
 Lists Basics'. Besides that, I had a look at a few GitHub pages for others' Libft projects and
 StackOverflow questions that were asked by people in the past; and AI wasn't really used for
-anything else than debugging. 
+anything else than debugging the more obscure bugs. 
 
 **Detailed Description of the Library**
 - `ft_isalpha() ft_isdigit() ft_isalnum() ft_isascii() ft_isprint() ft_strlen() ft_memset()
