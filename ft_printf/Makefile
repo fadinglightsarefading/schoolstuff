@@ -6,7 +6,7 @@
 #    By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/04 17:58:34 by cclarke           #+#    #+#              #
-#    Updated: 2025/12/09 19:25:23 by cclarke          ###   ########.fr        #
+#    Updated: 2025/12/11 14:14:50 by cclarke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME	=	libftprintf.a
 
 CC	=	cc	
 CFLAGS	=	-Wall -Wextra -Werror
-INCLUDE	=	libftprintf.h libft/libft.h
+INCLUDE	=	ft_printf.h libft/libft.h
 
-SRC	=	ft_printf.c ft_printalnum.c ft_printstr.c ft_printhexaddr.c ft_printunsdec.c
+SRC	=	ft_printf.c ft_printpercent.c ft_printalnum.c ft_printstr.c ft_printhexaddr.c \
+		ft_unsigned_itoa.c ft_printunsigned.c ft_printchar.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -39,5 +40,9 @@ clean:
 fclean: clean
 	$(MAKE) clean -C $(LIBFT_P)
 	rm -f $(NAME)
+
+main: $(LIBFT) $(OBJ)
+	cc -Wall -Wextra -Werror main.c -L. -lftprintf -Llibft -lft
+# remove before submission ^^^
 
 re: fclean all

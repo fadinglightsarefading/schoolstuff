@@ -6,13 +6,14 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:09:54 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/09 16:27:30 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/11 14:11:58 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_printalnum(char ch, int c, int *i)
+int	ft_printalnum(char ch, int c, int *i)
 {
+	int		r;
 	char	printch;
 	char	*printstr;
 
@@ -20,9 +21,17 @@ void	ft_printalnum(char ch, int c, int *i)
 	if (ch == 'd' || ch == 'i')
 	{
 		printstr = ft_strdup(ft_itoa(c));
-		write(1, printstr, ft_strlen(printstr));
+		if (!printstr)
+			return (0);
+		r = ft_strlen(printstr);
+		write(1, printstr, r);
+		free(printstr);
 	}
 	else
+	{
 		write(1, &printch, 1);
+		r = 1;
+	}
 	(*i)++;
+	return (r);
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_unsigned_itoa.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:17:44 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/10 17:34:45 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/11 13:32:43 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	ft_determine_len(int n, int neg)
+static int	ft_determine_len(unsigned int n, int neg)
 {
 	int	len;
 
@@ -28,7 +28,7 @@ static int	ft_determine_len(int n, int neg)
 	return (len);
 }
 
-static char	*ft_final(int negflag, int nlen, long interm)
+static char	*ft_final(int negflag, int nlen, unsigned long interm)
 {
 	char	*final;
 
@@ -48,13 +48,13 @@ static char	*ft_final(int negflag, int nlen, long interm)
 	return (final);
 }
 
-char	*ft_itoa(int n)
+char	*ft_unsigned_itoa(unsigned int n)
 {
-	int		negflag;
-	int		nlen;
-	long	interm;
+	int				negflag;
+	int				nlen;
+	unsigned long	interm;
 
-	interm = (long)n;
+	interm = (unsigned long)n;
 	negflag = 1;
 	if (n < 0)
 		negflag = -negflag;

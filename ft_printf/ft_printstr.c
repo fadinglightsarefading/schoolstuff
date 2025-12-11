@@ -6,13 +6,17 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:52:08 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/09 16:27:17 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/11 14:11:27 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_printstr(char *s, int *i)
+int	ft_printstr(char *s, int *i)
 {
-	write(1, s, ft_strlen(s));
+	int	r;
+
+	r = ft_strlen(s);
+	write(1, s, r);
 	(*i)++;
+	return (r);
 }
