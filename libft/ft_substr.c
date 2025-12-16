@@ -6,24 +6,22 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:23:33 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/15 19:37:19 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/16 17:56:12 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	unsigned int	i;
+	unsigned int		i;
 	size_t				allocamt;
-	char			*sub;
+	char				*sub;
 
 	if (!s)
 		return (NULL);
+	allocamt = 1;
 	if (start > (ft_strlen(s) + 1))
-	{
-		allocamt = 1;
 		start = ft_strlen(s);
-	}
 	else if (len > ft_strlen(s) - start)
 		allocamt = ft_strlen(s) - start + 1;
 	else
