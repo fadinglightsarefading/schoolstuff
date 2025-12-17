@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:51:26 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/11 14:28:12 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/17 15:00:52 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_printalnum(char ch, int c, int *i);
 int		ft_printstr(char *s, int *i);
 int		ft_printhexaddr(void *vptr, int *i);
 char	*ft_unsigned_itoa(unsigned int n);
-void	ft_printunsigned(char x, unsigned int n, int *i);
+int		ft_printunsigned(char x, unsigned int n, int *i);
 int		ft_printchar(char ch);
 
 #endif

@@ -6,53 +6,75 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:26:11 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/04 17:19:36 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/16 18:35:57 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdio.h>
 
-static int	ft_trim_len(const char *str, const char *set)
+static unsigned int	ft_determine_start(const char *s1, const char *set)
 {
 	int	i;
-	int	trim_len;
+	int	j;
 
-	trim_len = 0;
-	while (*str)
+	i = 0;
+	while (s1[i])
 	{
-		i = 0;
-		while (i < (int)ft_strlen(set))
-			if (set[i++] == *str)
-				trim_len++;
-		str++;
+		j = 0;
+		while (set[j])
+		{
+			if (s1[i] == set[j])
+			{
+				i++;
+				break ;
+			}
+			j++;
+		}
+		if (!set[j])
+			break ;
 	}
-	return (trim_len);
+	return (i);
+}
+
+static unsigned int	ft_determine_end(const char *s1, const char *set)
+{
+	int	i;
+	int	j;
+	int	len;
+
+	len = 0;
+	i = (int)((int)ft_strlen(s1) - 1);
+	while (s1[i])
+	{
+		j = 0;
+		while (set[j])
+		{
+			if (s1[i] == set[j])
+			{
+				len++;
+				i--;
+				break ;
+			}
+			j++;
+		}
+		if (!set[j])
+			break ;
+	}
+	return (len);
 }
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	int		i;
-	int		j;
-	int		trim_len;
-	int		flag;
-	char	*s2;
+	unsigned int	start;
+	size_t			len;
 
-	trim_len = ft_trim_len(s1, set);
-	s2 = malloc((ft_strlen(s1) - trim_len + 1) * sizeof(char));
-	if (!s2)
+	if (!s1 || !set)
 		return (NULL);
-	i = 0;
-	while (*s1)
-	{
-		j = 0;
-		flag = 0;
-		while (j < (int)ft_strlen(set))
-			if (set[j++] == *s1)
-				flag++;
-		if (!flag)
-			s2[i++] = *s1++;
-		else
-			s1++;
-	}
-	s2[i] = '\0';
-	return (s2);
+	if (!(*s1))
+		return (ft_strdup(""));
+	start = ft_determine_start(s1, set);
+	if (start == ft_strlen(s1))
+		return (ft_strdup(""));
+	len = ft_strlen(s1) - start - ft_determine_end(s1, set);
+	return (ft_substr(s1, start, len));
 }

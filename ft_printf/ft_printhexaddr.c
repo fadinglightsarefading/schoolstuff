@@ -6,48 +6,48 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:00:28 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/11 14:29:05 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/17 14:46:54 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
+#include <stdio.h>
 
-static void	ft_init_addrstr(char *s)
+static int	ft_determine_len(uintptr_t addr)
 {
 	int	i;
 
 	i = 0;
-	while (i <= 16)
-		s[i++] = '\0';
+	while (addr)
+	{
+		addr /= 16;
+		i++;
+	}
+	return (i);
 }
 
 int	ft_printhexaddr(void *vptr, int *i)
 {
-	int			countdown;
-	int			r;
 	char		*hex;
 	char		*hex_addr;
-	char		*hex_addr_cpy;
 	uintptr_t	dec_addr;
+	int		len;
+	int		j;
 
 	hex = "0123456789abcdef";
-	hex_addr = malloc(17 * sizeof(char));
-	if (!hex_addr)
-		return (0);
-	ft_init_addrstr(hex_addr);
 	dec_addr = (uintptr_t)vptr;
-	countdown = 15;
-	while (dec_addr || countdown)
+	len = ft_determine_len(dec_addr);
+	hex_addr = malloc((len + 1) * sizeof(char));
+	j = 0;
+	while (dec_addr)
 	{
-		hex_addr[countdown--] = hex[dec_addr % 16];
+		hex_addr[j++] = hex[dec_addr % 16];
 		dec_addr /= 16;
 	}
-	hex_addr_cpy = hex_addr;
-	while (*hex_addr_cpy == '\0')
-		hex_addr_cpy++;
+	hex_addr[j] = '\0';
+	len = ft_strlen(hex_addr);
 	write(1, "0x", 2);
-	r = ft_strlen(hex_addr_cpy) + 2;
-	write(1, hex_addr_cpy, r);
+	write(1, hex_addr, len);
 	free(hex_addr);
 	(*i)++;
-	return (r);
+	return (len + 2);
 }
