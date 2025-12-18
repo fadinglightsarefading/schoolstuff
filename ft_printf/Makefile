@@ -6,7 +6,7 @@
 #    By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/04 17:58:34 by cclarke           #+#    #+#              #
-#    Updated: 2025/12/11 14:14:50 by cclarke          ###   ########.fr        #
+#    Updated: 2025/12/18 17:43:19 by cclarke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	$(MAKE) clean -C $(LIBFT_P)
+	$(MAKE) fclean -C $(LIBFT_P)
 	rm -f $(NAME)
-
-main: $(LIBFT) $(OBJ)
-	cc -Wall -Wextra -Werror main.c -L. -lftprintf -Llibft -lft
-# remove before submission ^^^
 
 re: fclean all

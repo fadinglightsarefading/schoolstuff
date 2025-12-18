@@ -6,17 +6,17 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:59:57 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/17 15:44:49 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:40:21 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
 static int	ft_printunsdec(unsigned int u)
 {
-	int	len;
+	int		len;
 	char	*printstr;
 
-	printstr = ft_strdup(ft_unsigned_itoa(u));
+	printstr = ft_unsigned_itoa(u);
 	if (!printstr)
 		return (0);
 	len = ft_strlen(printstr);
@@ -35,7 +35,7 @@ static void	ft_puthex(unsigned int n, char *hex, int *len)
 
 int	ft_printunsigned(char x, unsigned int n, int *i)
 {
-	int	len;
+	int		len;
 	char	*hexlower;
 	char	*hexupper;
 

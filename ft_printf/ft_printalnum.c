@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:09:54 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/11 14:11:58 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:13:01 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -20,7 +20,7 @@ int	ft_printalnum(char ch, int c, int *i)
 	printch = (char)c;
 	if (ch == 'd' || ch == 'i')
 	{
-		printstr = ft_strdup(ft_itoa(c));
+		printstr = ft_itoa(c);
 		if (!printstr)
 			return (0);
 		r = ft_strlen(printstr);

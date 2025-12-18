@@ -6,7 +6,7 @@
 /*   By: cclarke <cclarke@student.42prague.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:56:04 by cclarke           #+#    #+#             */
-/*   Updated: 2025/12/17 15:00:29 by cclarke          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:20:45 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -26,7 +26,7 @@ static int	ft_determine_type(const char *s, int *i, va_list ap)
 		else if (s[*i] == '%' && s[(*i) + 1] == 's')
 			r += ft_printstr(va_arg(ap, char *), i);
 		else if (s[*i] == '%' && s[(*i) + 1] == 'p')
-			r += ft_printhexaddr(va_arg(ap, void *), i);
+			r += ft_printhexaddr((unsigned long int)va_arg(ap, void *), i);
 		else if (s[*i] == '%' && (s[(*i) + 1] == 'u' || s[(*i) + 1] == 'x'
 				|| s[(*i) + 1] == 'X'))
 			r += ft_printunsigned(s[(*i) + 1], va_arg(ap, unsigned int), i);
