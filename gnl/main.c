@@ -4,9 +4,13 @@
 
 int	main(void)
 {
+	char *line;
 	int fd = open("test.txt", O_RDONLY);
-	for (int i = 10; i; i--)
-		printf("%s", get_next_line(fd));
-	printf("\n");
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		line = get_next_line(fd);
+	}
 	return (0);
 }

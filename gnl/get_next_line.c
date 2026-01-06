@@ -1,6 +1,7 @@
 #include "get_next_line.h"
+#include <stdio.h>
 
-void	move_buf_pointer(char *buf)
+void	update_buffer(char *buf)
 {
 	while (*buf != '\n')
 		*buf++ = '\0';
@@ -10,35 +11,38 @@ void	move_buf_pointer(char *buf)
 
 int	check_newline(char *s)
 {
-	int	i;
-
-	i = 0;
-	while (!s[i])
-		i++;
-	while (i < BUFFER_SIZE)
+	while (!(*s))
+		s++;
+	while (*s)
 	{
-		if (s[i++] == '\n')
+		if (*s++ == '\n')
 			return (0);
 	}
 	return (1);
 }
 
-char	*construct_line(char *s)
+char	*construct_line(char *s, int bytes)
 {
 	int		i;
 	char	*return_string;
 
-	while (!(*s))
-		s++;
+	if (*s == '\0')
+		return (NULL);
 	i = 0;
-	while (s[i] != '\n')
+	while (s[i] != '\n' && s[i])
 		i++;
-	return_string = malloc((i + 2) * sizeof(char));
-	i = -1;
-	while (s[++i] != '\n')
+	if (bytes)
+		i++;
+	return_string = malloc((i + 1) * sizeof(char));
+	i = 0;
+	while (s[i] != '\n' && s[i])
+	{
 		return_string[i] = s[i];
-	return_string[i++] = '\n';
-	return_string[i] = '\0';
+		i++;
+	}
+	if (s[i] == '\n')
+		return_string[i] = s[i];
+	return_string[++i] = '\0';
 	return (return_string);
 }
 
@@ -52,12 +56,9 @@ char	*read_line(int fd, char *buf)
 
 	if (!check_newline(buf))
 	{
-		return_string = construct_line(buf);
-		move_buf_pointer(buf);
-		return (return_string);
+		str1 = ft_strdup(ft_strchr(buf, '\n') + 1);
+		update_buffer(buf);
 	}
-	else if (ft_strlen(buf))
-		str1 = ft_strrchr(buf, '\n');
 	else
 		str1 = ft_strdup("");
 	if (!str1)
@@ -65,14 +66,15 @@ char	*read_line(int fd, char *buf)
 	flag = 1;
 	while (flag)
 	{
-		bytes = read(fd, buf, BUFFER_SIZE);
-		if (bytes == 0)
-			return (NULL);
-		buf[bytes] = '\0';
-		str2 = ft_strjoin(str1, buf);
+		if (check_newline(buf))
+		{
+			bytes = read(fd, buf, BUFFER_SIZE);
+			if (!bytes)
+				break ;
+		}
+		str2 = ft_strjoin(str1, buf, bytes);
 		if (!str2)
 			return (NULL);
-		str1 = ft_strdup("");
 		free(str1);
 		str1 = ft_strdup(str2);
 		if (!str1)
@@ -80,20 +82,26 @@ char	*read_line(int fd, char *buf)
 		free(str2);
 		flag = check_newline(buf);
 	}
-	return_string = construct_line(str1);
+	return_string = construct_line(str1, bytes);
 	free(str1);
 	return (return_string);
 }
 
 char	*get_next_line(int fd)
 {
+	int		i;
 	static char	*buffer;
 	char		*return_string;
 
+	i = 0;
 	if (fd <= 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
+	{
 		buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		while (i <= BUFFER_SIZE)
+			buffer[i++] = '\0';
+	}
 	if (!buffer)
 		return (NULL);
 	return_string = read_line(fd, buffer);
