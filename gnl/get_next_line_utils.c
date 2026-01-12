@@ -41,7 +41,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2, int buf_len)
+char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ char	*ft_strjoin(const char *s1, const char *s2, int buf_len)
 
 	while (!(*s2))
 		s2++;
-	str = malloc((ft_strlen((char *)s1) + buf_len) * sizeof(char) + 1);
+	str = malloc((ft_strlen((char *)s1) + (*buf_len) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -57,7 +57,7 @@ char	*ft_strjoin(const char *s1, const char *s2, int buf_len)
 	while (s1[++i])
 		str[j++] = s1[i];
 	i = -1;
-	while (++i < buf_len)
+	while (++i < (*buf_len))
 		str[j++] = s2[i];
 	str[j] = '\0';
 	return (str);

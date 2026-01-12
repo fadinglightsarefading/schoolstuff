@@ -3,8 +3,14 @@
 
 void	update_buffer(char *buf)
 {
-	while (*buf != '\n')
+	int	i;
+
+	i = 0;
+	while (*buf != '\n' && i <= BUFFER_SIZE)
+	{
 		*buf++ = '\0';
+		i++;
+	}
 	if (*buf == '\n')
 		*buf = '\0';
 }
@@ -21,7 +27,7 @@ int	check_newline(char *s)
 	return (1);
 }
 
-char	*construct_line(char *s, int bytes)
+char	*construct_line(char *s, ssize_t *bytes)
 {
 	int		i;
 	char	*return_string;
@@ -31,7 +37,7 @@ char	*construct_line(char *s, int bytes)
 	i = 0;
 	while (s[i] != '\n' && s[i])
 		i++;
-	if (bytes)
+	if (*bytes)
 		i++;
 	return_string = malloc((i + 1) * sizeof(char));
 	i = 0;
@@ -41,15 +47,17 @@ char	*construct_line(char *s, int bytes)
 		i++;
 	}
 	if (s[i] == '\n')
+	{
 		return_string[i] = s[i];
-	return_string[++i] = '\0';
+		i++;
+	}
+	return_string[i] = '\0';
 	return (return_string);
 }
 
-char	*read_line(int fd, char *buf)
+char	*read_line(int fd, char *buf, ssize_t *bytes)
 {
 	int		flag;
-	int		bytes;
 	char	*str1;
 	char	*str2;
 	char	*return_string;
@@ -68,9 +76,13 @@ char	*read_line(int fd, char *buf)
 	{
 		if (check_newline(buf))
 		{
-			bytes = read(fd, buf, BUFFER_SIZE);
-			if (!bytes)
+			(*bytes) = read(fd, buf, BUFFER_SIZE);
+			if (!(*bytes))
+			{
+				while ((*bytes) < BUFFER_SIZE)
+				buf[(*bytes)++] = '\0';
 				break ;
+			}
 		}
 		str2 = ft_strjoin(str1, buf, bytes);
 		if (!str2)
@@ -90,6 +102,7 @@ char	*read_line(int fd, char *buf)
 char	*get_next_line(int fd)
 {
 	int		i;
+	ssize_t		bytes;
 	static char	*buffer;
 	char		*return_string;
 
@@ -104,6 +117,8 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	return_string = read_line(fd, buffer);
+	return_string = read_line(fd, buffer, &bytes);
+	if (!bytes)
+		free(buffer);
 	return (return_string);
 }
