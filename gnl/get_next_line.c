@@ -1,5 +1,4 @@
 #include "get_next_line.h"
-#include <stdio.h>
 
 void	update_buffer(char *buf)
 {
@@ -13,18 +12,6 @@ void	update_buffer(char *buf)
 	}
 	if (*buf == '\n')
 		*buf = '\0';
-}
-
-int	check_newline(char *s)
-{
-	while (!(*s))
-		s++;
-	while (*s)
-	{
-		if (*s++ == '\n')
-			return (0);
-	}
-	return (1);
 }
 
 char	*construct_line(char *s, ssize_t *bytes)
@@ -55,11 +42,37 @@ char	*construct_line(char *s, ssize_t *bytes)
 	return (return_string);
 }
 
+int	read_line_two(int fd, char *buf, ssize_t *bytes, char **str1)
+{
+	char	*str2;
+
+	while (1)
+	{
+		if (check_newline(buf))
+		{
+			(*bytes) = read(fd, buf, BUFFER_SIZE);
+			if (!(*bytes))
+			{
+				while ((*bytes) < BUFFER_SIZE)
+					buf[(*bytes)++] = '\0';
+				*bytes = 0;
+				break ;
+			}
+		}
+		str2 = ft_strjoin(*str1, buf, bytes);
+		if (!str2)
+			return (1);
+		free(*str1);
+		*str1 = str2;
+		if (!check_newline(buf))
+			break ;
+	}
+	return (0);
+}
+
 char	*read_line(int fd, char *buf, ssize_t *bytes)
 {
-	int		flag;
 	char	*str1;
-	char	*str2;
 	char	*return_string;
 
 	if (!check_newline(buf))
@@ -71,29 +84,8 @@ char	*read_line(int fd, char *buf, ssize_t *bytes)
 		str1 = ft_strdup("");
 	if (!str1)
 		return (NULL);
-	flag = 1;
-	while (flag)
-	{
-		if (check_newline(buf))
-		{
-			(*bytes) = read(fd, buf, BUFFER_SIZE);
-			if (!(*bytes))
-			{
-				while ((*bytes) < BUFFER_SIZE)
-				buf[(*bytes)++] = '\0';
-				break ;
-			}
-		}
-		str2 = ft_strjoin(str1, buf, bytes);
-		if (!str2)
-			return (NULL);
-		free(str1);
-		str1 = ft_strdup(str2);
-		if (!str1)
-			return (NULL);
-		free(str2);
-		flag = check_newline(buf);
-	}
+	if (read_line_two(fd, buf, bytes, &str1))
+		return (NULL);
 	return_string = construct_line(str1, bytes);
 	free(str1);
 	return (return_string);
@@ -101,13 +93,13 @@ char	*read_line(int fd, char *buf, ssize_t *bytes)
 
 char	*get_next_line(int fd)
 {
-	int		i;
-	ssize_t		bytes;
-	static char	*buffer;
-	char		*return_string;
+	static char		*buffer;
+	ssize_t			bytes;
+	char			*return_string;
+	int				i;
 
 	i = 0;
-	if (fd <= 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
 	{
@@ -119,6 +111,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return_string = read_line(fd, buffer, &bytes);
 	if (!bytes)
+	{
 		free(buffer);
+		buffer = NULL;
+	}
 	return (return_string);
 }

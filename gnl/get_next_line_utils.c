@@ -1,5 +1,17 @@
 #include "get_next_line.h"
 
+int	check_newline(char *s)
+{
+	while (!(*s))
+		s++;
+	while (*s)
+	{
+		if (*s++ == '\n')
+			return (0);
+	}
+	return (1);
+}
+
 size_t	ft_strlen(char *s)
 {
 	int	i;

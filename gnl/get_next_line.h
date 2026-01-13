@@ -5,11 +5,12 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
-size_t		ft_strlen(char *s);
+int		check_newline(char *s);
+size_t	ft_strlen(char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len);
