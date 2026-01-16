@@ -16,7 +16,7 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-
+/*
 	printf("\n====================\nTEST2\n====================\n\n");
 	fd = open("test1.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))
@@ -34,7 +34,7 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-
+*/
 	printf("\n====================\nTEST4\n====================\n\n");
 	fd = open("test3.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))

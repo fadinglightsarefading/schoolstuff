@@ -1,17 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cclarke <cclarke@student.42prague.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 17:39:56 by cclarke           #+#    #+#             */
+/*   Updated: 2026/01/16 20:27:31 by cclarke          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	update_buffer(char *buf)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (*buf != '\n' && i <= BUFFER_SIZE)
-	{
-		*buf++ = '\0';
+	while (buf[i] != '\n' && i < BUFFER_SIZE)
 		i++;
-	}
-	if (*buf == '\n')
-		*buf = '\0';
+	if (buf[i] == '\n')
+		i++;
+	j = 0;
+	while (buf[i])
+		buf[j++] = buf[i++];
+	while (j < BUFFER_SIZE)
+		buf[j++] = '\0';
 }
 
 char	*construct_line(char *s, ssize_t *bytes)
@@ -42,28 +57,23 @@ char	*construct_line(char *s, ssize_t *bytes)
 	return (return_string);
 }
 
-int	read_line_two(int fd, char *buf, ssize_t *bytes, char **str1)
+int	read_line_two(int fd, char *buf, ssize_t *bytes, char **str1, char **str2)
 {
-	char	*str2;
-
 	while (1)
 	{
 		if (check_newline(buf))
 		{
 			(*bytes) = read(fd, buf, BUFFER_SIZE);
+			if (*bytes == -1)
+				return (1);
 			if (!(*bytes))
-			{
-				while ((*bytes) < BUFFER_SIZE)
-					buf[(*bytes)++] = '\0';
-				*bytes = 0;
 				break ;
-			}
 		}
-		str2 = ft_strjoin(*str1, buf, bytes);
+		*str2 = ft_strjoin(*str1, buf, bytes);
 		if (!str2)
 			return (1);
 		free(*str1);
-		*str1 = str2;
+		*str1 = *str2;
 		if (!check_newline(buf))
 			break ;
 	}
@@ -73,6 +83,7 @@ int	read_line_two(int fd, char *buf, ssize_t *bytes, char **str1)
 char	*read_line(int fd, char *buf, ssize_t *bytes)
 {
 	char	*str1;
+	char	*str2;
 	char	*return_string;
 
 	if (!check_newline(buf))
@@ -84,7 +95,7 @@ char	*read_line(int fd, char *buf, ssize_t *bytes)
 		str1 = ft_strdup("");
 	if (!str1)
 		return (NULL);
-	if (read_line_two(fd, buf, bytes, &str1))
+	if (read_line_two(fd, buf, bytes, &str1, &str2))
 		return (NULL);
 	return_string = construct_line(str1, bytes);
 	free(str1);
@@ -110,7 +121,7 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	return_string = read_line(fd, buffer, &bytes);
-	if (!bytes)
+	if (!bytes || !return_string)
 	{
 		free(buffer);
 		buffer = NULL;

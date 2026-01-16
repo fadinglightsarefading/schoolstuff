@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cclarke <cclarke@student.42prague.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 17:40:05 by cclarke           #+#    #+#             */
+/*   Updated: 2026/01/16 20:22:52 by cclarke          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	check_newline(char *s)
 {
-	while (!(*s))
-		s++;
 	while (*s)
 	{
 		if (*s++ == '\n')
@@ -24,8 +34,6 @@ size_t	ft_strlen(char *s)
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (!(*s))
-		s++;
 	while (*s)
 	{
 		if (*s == (char)c)
@@ -59,8 +67,6 @@ char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
 	int		j;
 	char	*str;
 
-	while (!(*s2))
-		s2++;
 	str = malloc((ft_strlen((char *)s1) + (*buf_len) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
