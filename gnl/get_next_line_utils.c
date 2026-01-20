@@ -70,13 +70,13 @@ char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
 	str = malloc((ft_strlen((char *)s1) + (*buf_len) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = -1;
+	i = 0;
 	j = 0;
-	while (s1[++i])
-		str[j++] = s1[i];
-	i = -1;
-	while (++i < (*buf_len))
-		str[j++] = s2[i];
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (i < (*buf_len))
+		str[j++] = s2[i++];
 	str[j] = '\0';
 	return (str);
 }

@@ -12,11 +12,18 @@
 
 #include "get_next_line.h"
 
-void	update_buffer(char *buf)
+void	update_buffer(char *buf, int end)
 {
 	int	i;
 	int	j;
 
+	if (end)
+	{
+		i = 0;
+		while (i < BUFFER_SIZE)
+			buf[i++] = '\0';
+		return ;
+	}
 	i = 0;
 	while (buf[i] != '\n' && i < BUFFER_SIZE)
 		i++;
@@ -86,17 +93,21 @@ char	*read_line(int fd, char *buf, ssize_t *bytes)
 	char	*str2;
 	char	*return_string;
 
-	if (!check_newline(buf))
-	{
-		str1 = ft_strdup(ft_strchr(buf, '\n') + 1);
-		update_buffer(buf);
-	}
-	else
+	if (!(*buf))
 		str1 = ft_strdup("");
+	else
+		str1 = ft_strdup(buf);
+
 	if (!str1)
 		return (NULL);
 	if (read_line_two(fd, buf, bytes, &str1, &str2))
+	{
+		free(str1);
 		return (NULL);
+	}
+	update_buffer(buf, 0);
+	if (*bytes < BUFFER_SIZE && check_newline(buf))
+		update_buffer(buf, 1);
 	return_string = construct_line(str1, bytes);
 	free(str1);
 	return (return_string);
