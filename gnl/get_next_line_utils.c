@@ -17,9 +17,9 @@ int	check_newline(char *s)
 	while (*s)
 	{
 		if (*s++ == '\n')
-			return (0);
+			return (1);
 	}
-	return (1);
+	return (0);
 }
 
 size_t	ft_strlen(char *s)
@@ -68,6 +68,7 @@ char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
 	char	*str;
 
 	str = malloc((ft_strlen((char *)s1) + (*buf_len) + 1) * sizeof(char));
+//	str = malloc(ft_strlen((char *)s1) + (ft_strlen((char *)s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -76,7 +77,9 @@ char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
 		str[j++] = s1[i++];
 	i = 0;
 	while (i < (*buf_len))
-		str[j++] = s2[i++];
+		str[j++] = s2[i++]; 
+//	while (s2[i])
+//		str[j++] = s2[i++]; 
 	str[j] = '\0';
 	return (str);
 }

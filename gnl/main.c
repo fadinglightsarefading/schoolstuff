@@ -43,6 +43,15 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-
+/*
+	printf("\n====================\nTEST5\n====================\n\n");
+	fd = open("test4.txt", O_RDONLY);
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+*/
 	return (0);
 }
