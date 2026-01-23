@@ -7,7 +7,7 @@ int	main(void)
 {
 	char *line;
 	int fd;
-
+/*
 	printf("\n====================\nTEST1\n====================\n\n");
 	fd = open("test.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))
@@ -43,7 +43,7 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-/*
+
 	printf("\n====================\nTEST5\n====================\n\n");
 	fd = open("test4.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))
@@ -53,5 +53,15 @@ int	main(void)
 	}
 	close(fd);
 */
+
+	printf("\n====================\nTEST X\n====================\n\n");
+	fd = open("testx.txt", O_RDONLY);
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+
 	return (0);
 }

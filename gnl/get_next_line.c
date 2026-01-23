@@ -6,19 +6,19 @@
 /*   By: cclarke <cclarke@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:39:56 by cclarke           #+#    #+#             */
-/*   Updated: 2026/01/22 20:15:18 by cclarke          ###   ########.fr       */
+/*   Updated: 2026/01/23 19:49:17 by cclarke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	update_buffer(char *buf, int end)
+void	update_buffer(char *buf, int end, ssize_t *bytes)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (end)
+	if (end == 1)
 	{
 		while (i < BUFFER_SIZE)
 			buf[i++] = '\0';
@@ -97,10 +97,10 @@ char	*read_line(int fd, char *buf, ssize_t *bytes)
 		free(str1);
 		return (NULL);
 	}
-	update_buffer(buf, 0);
+	update_buffer(buf, 0, bytes);
 	if (*bytes < BUFFER_SIZE && (int)ft_strlen(str1) != (int)*bytes
 		&& !check_newline(buf))
-		update_buffer(buf, 1);
+		update_buffer(buf, 1, bytes);
 	return_string = construct_line(str1);
 	free(str1);
 	return (return_string);
@@ -124,7 +124,7 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	bytes = 1;
+	bytes = BUFFER_SIZE;
 	return_string = read_line(fd, buffer, &bytes);
 	if (!bytes)
 	{
