@@ -1,0 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cclarke <cclarke@student.42prague.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 17:40:05 by cclarke           #+#    #+#             */
+/*   Updated: 2026/01/22 20:15:50 by cclarke          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+int	check_newline(char *s)
+{
+	while (*s)
+	{
+		if (*s++ == '\n')
+			return (1);
+	}
+	return (0);
+}
+
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (*s++)
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	else
+		return (NULL);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	char	*dup;
+
+	dup = malloc((ft_strlen((char *)s) + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+		dup[i] = s[i];
+	dup[i] = '\0';
+	return (dup);
+}
+
+char	*ft_strjoin(const char *s1, const char *s2, ssize_t *buf_len)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	str = malloc((ft_strlen((char *)s1) + (*buf_len) + 1) * sizeof(char));
+//	str = malloc(ft_strlen((char *)s1) + (ft_strlen((char *)s2) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (i < (*buf_len))
+		str[j++] = s2[i++]; 
+//	while (s2[i])
+//		str[j++] = s2[i++]; 
+	str[j] = '\0';
+	return (str);
+}
